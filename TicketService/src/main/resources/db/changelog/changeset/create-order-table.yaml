@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      runOnChange: true
+      id: create-order
+      author: alex
+      runOrder: last
+      changes:
+        - createTable:
+            tableName: order
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: from_station_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: from_station_id
+                    references: station(id)
+                    nullable: false
+              - column:
+                  name: to_station_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: to_station_id
+                    references: station(id)
+                    nullable: false
+              - column:
+                  name: status
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp
